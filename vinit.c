@@ -57,15 +57,10 @@ int main(void){
 	unsigned int VFProgram;
 	VP_VFCompile(&VFProgram);
 
-	/*
+
 	// Section: File Based Vertices
 	int VertSize;
 	float* Vertices = VP_LoadVox("./Objects/Garden.vpvox", &VertSize);
-	*/
-
-	float Vertices[] = {
-		0.0f, 0.0f, 0.0f,
-	};
 
 	GLuint VBO, VAO;
 	glGenVertexArrays(1, &VAO);
@@ -73,7 +68,7 @@ int main(void){
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, /*VertSize*/sizeof(Vertices), Vertices, GL_STATIC_DRAW); // Alt Size Arg: sizeof(vertices)
+	glBufferData(GL_ARRAY_BUFFER, VertSize/*sizeof(Vertices)*/, Vertices, GL_STATIC_DRAW); // Alt Size Arg: sizeof(vertices)
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0); //ALT 6 ARG: (void*)0
 	glEnableVertexAttribArray(0);
