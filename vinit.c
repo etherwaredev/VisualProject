@@ -57,7 +57,6 @@ int main(void){
 	unsigned int VFProgram;
 	VP_VFCompile(&VFProgram);
 
-
 	// Section: File Based Vertices
 	int VertSize;
 	float* Vertices = VP_LoadVox("./Objects/Garden.vpvox", &VertSize);
@@ -78,7 +77,7 @@ int main(void){
 	glEnableVertexAttribArray(1);
 	*/
 
-	// glBindBuffer(GL_ARRAY_BUFFER, 0); // You may optionally unbind if needed here as glVertexAttribPointer() bound/selected to the VBO.
+	// glBindBuffer(GL_ARRAY_BUFFER, 0); // Note: You may optionally unbind if needed here as glVertexAttribPointer() bound/selected to the VBO.
 	glBindVertexArray(0); // (Semi-Optional) VAO Unbind
 
 	/*
@@ -110,10 +109,9 @@ int main(void){
 	// Section: Matrices
 	//	// Sub-Section: View Matrix
 	mat4 ViewMatrix; glm_mat4_identity(ViewMatrix);
-	glm_translate_x(ViewMatrix, -.7);
-	glm_translate_y(ViewMatrix, -.2);
+	// glm_translate_x(ViewMatrix, -.7);
+	// glm_translate_y(ViewMatrix, -.2);
 	glm_translate_z(ViewMatrix, -2);
-	// glm_mat4_print(ViewMatrix, stdout); // TMP DEBUG PRINT
 
 	glUseProgram(VFProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
@@ -121,7 +119,6 @@ int main(void){
 	//	// Sub-Section: Projection Matrix
 	mat4 ProjMatrix;
 	glm_perspective(glm_rad(90.0f), ((float)VP_INIT_WIN_SIZE_W/(float)VP_INIT_WIN_SIZE_H), 0.1f, 100.0f, (vec4 *)&ProjMatrix);
-	// glm_mat4_print(ProjMatrix, stdout); // TMP DEBUG PRINT
 
 	glUseProgram(VFProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
