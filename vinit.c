@@ -61,6 +61,8 @@ int main(void){
 	int VertSize;
 	float* Vertices = VP_LoadVox("./Objects/Garden.vpvox", &VertSize);
 
+	int LoadedObjects = (VertSize/24); // Every 3 Vertices is 24 bytes
+
 	GLuint VBO, VAO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -139,7 +141,7 @@ int main(void){
 
 		glUseProgram(VFProgram);
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_POINTS, 0, 2);
+		glDrawArrays(GL_POINTS, 0, LoadedObjects);
 
 		// Sub-Section: Frame End
 		glfwSwapBuffers(window);
