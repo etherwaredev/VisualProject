@@ -67,7 +67,7 @@ int main(void){
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, VertSize/*sizeof(Vertices)*/, Vertices, GL_STATIC_DRAW); // Alt Size Arg: sizeof(vertices)
+	glBufferData(GL_ARRAY_BUFFER, VertSize, Vertices, GL_STATIC_DRAW); // Alt Size Arg: sizeof(vertices)
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0); //ALT 6 ARG: (void*)0
 	glEnableVertexAttribArray(0);
@@ -109,9 +109,9 @@ int main(void){
 	// Section: Matrices
 	//	// Sub-Section: View Matrix
 	mat4 ViewMatrix; glm_mat4_identity(ViewMatrix);
-	// glm_translate_x(ViewMatrix, -.7);
-	// glm_translate_y(ViewMatrix, -.2);
-	glm_translate_z(ViewMatrix, -2);
+	glm_translate_x(ViewMatrix, -.7);
+	glm_translate_y(ViewMatrix, -.7);
+	glm_translate_z(ViewMatrix, -4);
 
 	glUseProgram(VFProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
