@@ -93,7 +93,7 @@ int main(void){
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	int TexWidth, TexHeight, nrChannels; //If Loading Many, make this an array lol
+	int TexWidth, TexHeight, nrChannels; // If Loading Many, make this an array
 	unsigned char *LoadedImage = stbi_load("Textures/Blueberry.jpg", &TexWidth, &TexHeight, &nrChannels, 0);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, TexWidth, TexHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, LoadedImage);
@@ -109,9 +109,9 @@ int main(void){
 	// Section: Matrices
 	//	// Sub-Section: View Matrix
 	mat4 ViewMatrix; glm_mat4_identity(ViewMatrix);
-	glm_translate_x(ViewMatrix, -.7);
-	glm_translate_y(ViewMatrix, -.7);
-	glm_translate_z(ViewMatrix, -4);
+	glm_translate_x(ViewMatrix, -.8);
+	glm_translate_y(ViewMatrix, -1);
+	glm_translate_z(ViewMatrix, -5);
 
 	glUseProgram(VFProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
@@ -146,6 +146,6 @@ int main(void){
 		glfwPollEvents();
 	}
 	glfwTerminate();
-	//free(Vertices);
+	free(Vertices);
 	return EXIT_SUCCESS;
 }
