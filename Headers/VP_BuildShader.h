@@ -43,13 +43,13 @@ float* VP_LoadVox(char* FilePath, int *OpSize) {
 	// ReadFile() SECTION
 	int ByteSize;
 	char *RawVoxOut = VP_ReadFile(FilePath, &ByteSize);
-	float* Output = malloc( (sizeof(float)*(ByteSize/8)) ) ; // 8 is a magic number based on the amount of chars in the file format.
+	float* Output = malloc( (sizeof(float)*(ByteSize/8)) ); // 8 is a magic number based on the amount of chars in the file format.
 
 	// FLOAT CONVERSION SECTION
 	unsigned int VoxelIndex = 0;
 	for (unsigned int i = 0; i <= ByteSize; i++) {
 		if (RawVoxOut[i] == ',') {
-			char buffer[6] = {RawVoxOut[i-6], RawVoxOut[i-5], RawVoxOut[i-4], RawVoxOut[i-3], RawVoxOut[i-2], RawVoxOut[i-1]};
+			char buffer[7] = {RawVoxOut[i-6], RawVoxOut[i-5], RawVoxOut[i-4], RawVoxOut[i-3], RawVoxOut[i-2], RawVoxOut[i-1]};
 			Output[VoxelIndex] = strtof(buffer, NULL);
 			VoxelIndex++;
 		}

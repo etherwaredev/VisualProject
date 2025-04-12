@@ -109,7 +109,7 @@ int main(void){
 	// Section: Matrices
 	//	// Sub-Section: View Matrix
 	mat4 ViewMatrix; glm_mat4_identity(ViewMatrix);
-	glm_translate_x(ViewMatrix, -.8);
+	//glm_translate_x(ViewMatrix, -.8);
 	glm_translate_y(ViewMatrix, -1);
 	glm_translate_z(ViewMatrix, -5);
 
@@ -139,7 +139,7 @@ int main(void){
 
 		glUseProgram(VFProgram);
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_POINTS, 0, 1);
+		glDrawArrays(GL_POINTS, 0, 2);
 
 		// Sub-Section: Frame End
 		glfwSwapBuffers(window);
