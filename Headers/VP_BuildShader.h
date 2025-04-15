@@ -2,6 +2,7 @@
 Contents:
 * VP_ReadFile() --- Which Reads files, requires STDIO, STDLIB, fcntl, stat, & unistd
 * VP_VFCompile() --- Which build shaders from read files, requires All of the above + An OpenGL Context
+* VP_LoadVox() --- Which builds a float array (for voxel positions) from a read file.
 */
 
 // Header Guard <3
