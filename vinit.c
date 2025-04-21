@@ -112,8 +112,8 @@ int main(void){
 	//	// Sub-Section: View Matrix
 	mat4 ViewMatrix; glm_mat4_identity(ViewMatrix);
 	//glm_translate_x(ViewMatrix, -.8);
-	glm_translate_y(ViewMatrix, -1);
-	glm_translate_z(ViewMatrix, -5);
+	glm_translate_y(ViewMatrix, -1.5);
+	glm_translate_z(ViewMatrix, -5.5);
 
 	glUseProgram(VFProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
