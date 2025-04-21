@@ -12,10 +12,10 @@
 #include "Headers/cglm/struct.h"
 #include "Headers/VP_BuildShader.h"
 
-#define VP_INIT_WIN_SIZE_H 900
-#define VP_INIT_WIN_SIZE_W 1400
+#define VP_INIT_WIN_SIZE_H 950
+#define VP_INIT_WIN_SIZE_W 1500
 
-// framebuffer_size_callback was defined here due to clang complaining. Function is fine if moved right above glfwSetFramebufferSizeCallback()
+// Note: framebuffer_size_callback was defined here due to clang complaining. Function is fine if moved right above glfwSetFramebufferSizeCallback()
 void framebuffer_size_callback(GLFWwindow* window, int width, int height){
 	glViewport(0, 0, width, height);
 }
@@ -61,7 +61,7 @@ int main(void){
 	int VertSize;
 	float* Vertices = VP_LoadVox("./Objects/Garden.vpvox", &VertSize);
 
-	int LoadedObjects = (VertSize/24); // Every 3 Vertices is 24 bytes
+	int LoadedObjects = (VertSize/24); // Every 3 Vertex Components == 24 bytes
 
 	GLuint VBO, VAO;
 	glGenVertexArrays(1, &VAO);
@@ -126,7 +126,7 @@ int main(void){
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
 
 	// Section: Rendering Configuration
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wireframe Mode
+	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wireframe Mode
 
 	// Section: Main Frame Loop
 	while (!glfwWindowShouldClose(window)){
