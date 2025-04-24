@@ -136,8 +136,10 @@ int main(void){
 		glClearColor(.25f, .08f, .37f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//glActiveTexture(GL_TEXTURE0);
-		//glBindTexture(GL_TEXTURE_2D, texture0);
+		/* Texture Related Calls
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture0);
+		*/
 
 		glUseProgram(VFProgram);
 		glBindVertexArray(VAO);
