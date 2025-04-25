@@ -12,7 +12,7 @@ Contents:
 char* VP_ReadFile(char *Path, int *OpSize) {
 	int OFDesc; // Open File Description
 	if ( !(OFDesc = open(Path, 0, 00400)) ) { // FLAGS: O_RDONLY and S_IRUSR
-		printf("FILE COULD NOT BE OPENED");
+		printf("FILE COULD NOT BE OPENED\n");
 	}
 	else {
 		// FILE STAT INFO SEGMENT
@@ -31,8 +31,10 @@ char* VP_ReadFile(char *Path, int *OpSize) {
 			return (Fstore);
 		}
 		else {
-			printf("FILE COULD NOT BE READ");
+			printf("FILE COULD NOT BE READ\n");
 			close(OFDesc);
+			Fstore = NULL;
+			return (Fstore);
 		}
 	}
 }
