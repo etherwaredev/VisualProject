@@ -33,7 +33,7 @@ char* VP_ReadFile(char *Path, int *OpSize) {
 		else {
 			printf("FILE COULD NOT BE READ\n");
 			close(OFDesc);
-			Fstore = NULL;
+			free(Fstore); Fstore = NULL;
 			return (Fstore);
 		}
 	}
