@@ -60,6 +60,9 @@ int main(void){
 	// Section: File Based Vertices
 	int VertSize;
 	float* Vertices = VP_LoadVox("./Objects/Garden.vpvox", &VertSize);
+	if (!Vertices) {
+		printf("VERTICES COULD NOT BE LOADED\n");
+	}
 
 	int LoadedObjects = (VertSize/24); // Every 3 Vertex Components == 24 bytes
 
@@ -112,8 +115,8 @@ int main(void){
 	//	// Sub-Section: View Matrix
 	mat4 ViewMatrix; glm_mat4_identity(ViewMatrix);
 	//glm_translate_x(ViewMatrix, -.8);
-	glm_translate_y(ViewMatrix, -1.5);
-	glm_translate_z(ViewMatrix, -5.5);
+	glm_translate_y(ViewMatrix, -3.5);
+	glm_translate_z(ViewMatrix, -6.5);
 
 	glUseProgram(VFProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
