@@ -62,6 +62,7 @@ int main(void){
 	float* Vertices = VP_LoadVox("./Objects/Garden.vpvox", &VertSize);
 	if (!Vertices) {
 		printf("VERTICES COULD NOT BE LOADED\n");
+		return EXIT_FAILURE;
 	}
 
 	int LoadedObjects = (VertSize/24); // Every 3 Vertex Components == 24 bytes
