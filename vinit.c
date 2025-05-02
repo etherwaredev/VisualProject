@@ -131,6 +131,7 @@ int main(void){
 
 	// Section: Rendering Configuration
 	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wireframe Mode
+	glEnable(GL_DEPTH_TEST);
 
 	// Section: Main Frame Loop
 	while (!glfwWindowShouldClose(window)){
@@ -138,7 +139,7 @@ int main(void){
 
 		// Sub-Section: GL
 		glClearColor(.25f, .08f, .37f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		/* Texture Related Calls
 		glActiveTexture(GL_TEXTURE0);
