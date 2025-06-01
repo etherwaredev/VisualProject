@@ -1,8 +1,8 @@
 # VISUAL PROJECT
-The sole existance of this project is to be a testing ground for me learning OpenGL
+The sole existence of this project is to be a testing ground for me learning OpenGL
 
 ### Libraries
-(List Disincludes Common C Standard Libraries)
+(List disincludes common C Standard libraries)
 * OpenGL (v4.6)
     * GL Loading Lib: [GLEW](https://github.com/nigels-com/glew)
 * [GLFW](https://www.glfw.org/) (v3)
