@@ -1,5 +1,5 @@
 # VISUAL PROJECT
-The sole existence of this project is to be a testing ground for me learning OpenGL
+This project is intended as a testing ground for usage of OpenGL
 
 ### Libraries
 (List disincludes common C Standard libraries)
