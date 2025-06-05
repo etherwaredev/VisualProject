@@ -1,5 +1,5 @@
 # VISUAL PROJECT
-This project is intended as a testing ground for usage of OpenGL
+This project is intended as a testing ground for usage of OpenGL (in C).
 
 ### Libraries
 (List disincludes common C Standard libraries)
