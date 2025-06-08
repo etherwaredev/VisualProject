@@ -12,7 +12,7 @@
 #include "Headers/cglm/struct.h"
 #include "Headers/VP_BuildShader.h"
 
-#define VP_INIT_WIN_SIZE_H 975
+#define VP_INIT_WIN_SIZE_H 950
 #define VP_INIT_WIN_SIZE_W 1500
 
 // Note: framebuffer_size_callback was defined here due to clang complaining. Function is fine if moved right above glfwSetFramebufferSizeCallback()
