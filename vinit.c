@@ -28,7 +28,10 @@ void VP_ReadInputKeyboard(GLFWwindow *window){
 
 int main(void){
     // Section: GLFW Init Block
+    #if defined(__linux__)
     glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);
+    #endif
+
 	if (!glfwInit()) {printf("GLFW Initialization Failed\n"); return EXIT_FAILURE;}
 	else {
 		#if defined(__linux__)
