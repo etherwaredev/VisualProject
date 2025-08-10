@@ -33,6 +33,7 @@ int main(void){
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); //4
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6); //6
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);
 	}
 
 	// Section: Window Creation
