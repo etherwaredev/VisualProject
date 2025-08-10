@@ -28,12 +28,12 @@ void VP_ReadInputKeyboard(GLFWwindow *window){
 
 int main(void){
     // Section: GLFW Init Block
+    glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);
 	if (!glfwInit()) {printf("GLFW Initialization Failed\n"); return EXIT_FAILURE;}
 	else {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); //4
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6); //6
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);
 	}
 
 	// Section: Window Creation
