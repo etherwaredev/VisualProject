@@ -9,6 +9,9 @@ This project is intended as a testing ground for usage of OpenGL (in C).
 * Nothing's [STB](https://github.com/nothings/stb)
 * [CGLM](https://github.com/recp/cglm)
 
+#### Windowing API Support
+Only X11 is supported; however, you may run it on Wayland if you're using XWayland.
+
 ### Usage
 Renders provided `.vpvox` files found in `VisualProject/Objects/` as cubes.
 * Specified via the usage of `VP_LoadVox()`.
