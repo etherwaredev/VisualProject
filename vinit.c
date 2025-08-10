@@ -31,8 +31,21 @@ int main(void){
     glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);
 	if (!glfwInit()) {printf("GLFW Initialization Failed\n"); return EXIT_FAILURE;}
 	else {
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); //4
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6); //6
+		#if defined(__linux__)
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); //4
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6); //6
+		#endif
+
+		#if defined(_WIN32)
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); //4
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6); //6
+		#endif
+
+		#if defined(__APPLE__)
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); //4
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1); //1
+		#endif
+
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	}
 
