@@ -1,5 +1,6 @@
 # VISUAL PROJECT
 This project is intended as a testing ground for usage of OpenGL (in C).
+* This project is intended to run on Unix based OS' (Linux, Mac)
 
 ### Libraries
 (List disincludes common C Standard libraries)
