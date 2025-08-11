@@ -11,7 +11,7 @@ ifeq ($(OSNAME), Darwin)
 	UtilizedCOM = gcc vinit.c -L/usr/local/include/ -L/usr/lib -framework OpenGL -lGLEW -lglfw -lpthread -ldl -lm -o .out/vinit.o
 endif
 
-vinit.c: vinit.c
+vinit.c:
 	-mkdir .out
 	$(UtilizedCOM)
 
