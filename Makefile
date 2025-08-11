@@ -17,7 +17,7 @@ vinit.c:
 
 ifeq ($(OSNAME), Darwin)
 	# Note: Sed requires suffix arguments for -i on MacOS
-	sed -i=.bak "1,1s/460/410/" Shaders/Shader.vert
-	sed -i=.bak "1,1s/460/410/" Shaders/Shader.geo
-	sed -i=.bak "1,1s/460/410/" Shaders/Shader.frag
+	sed -i .bak "1,1s/460/410/" Shaders/Shader.vert
+	sed -i .bak "1,1s/460/410/" Shaders/Shader.geo
+	sed -i .bak "1,1s/460/410/" Shaders/Shader.frag
 endif
