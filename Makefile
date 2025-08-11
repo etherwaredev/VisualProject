@@ -9,11 +9,14 @@ endif
 
 ifeq ($(OSNAME), Darwin)
 	UtilizedCOM = gcc vinit.c -L/usr/local/include/ -L/usr/lib -framework OpenGL -lGLEW -lglfw -lpthread -ldl -lm -o .out/vinit.o
-	sed -i "1,1s/460/410/" Shaders/Shader.vert
-	sed -i "1,1s/460/410/" Shaders/Shader.geo
-	sed -i "1,1s/460/410/" Shaders/Shader.frag
 endif
 
 vinit.c: vinit.c
 	-mkdir .out
 	$(UtilizedCOM)
+
+ifeq ($(OSNAME), Darwin)
+	sed -i "1,1s/460/410/" Shaders/Shader.vert
+	sed -i "1,1s/460/410/" Shaders/Shader.geo
+	sed -i "1,1s/460/410/" Shaders/Shader.frag
+endif
