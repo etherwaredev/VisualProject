@@ -1,3 +1,4 @@
+#include "Headers/cglm/vec3.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -20,29 +21,34 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height){
 	glViewport(0, 0, width, height);
 }
 
-void VP_ReadInputKeyboard(GLFWwindow *window, mat4 ViewM){
+void VP_ReadInputKeyboard(GLFWwindow *window, vec3 EyeVec, vec3 CenterVec, vec3 UpVec, mat4 VMatrix){
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
     }
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-		glm_translate_z(ViewM, 1);
+		glm_vec3_sub(CenterVec, EyeVec, CenterVec);
 	}
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-		glm_translate_z(ViewM, -1);
+		glm_vec3_add(CenterVec, EyeVec, CenterVec);
 	}
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-		glm_translate_x(ViewM, 1);
+		vec3 TMPVecKeyA;
+		glm_cross(EyeVec, UpVec, TMPVecKeyA);
+		glm_normalize(TMPVecKeyA);
+		glm_vec3_add(CenterVec, TMPVecKeyA, CenterVec);
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-		glm_translate_x(ViewM, -1);
+		vec3 TMPVecKeyD;
+		glm_cross(EyeVec, UpVec, TMPVecKeyD);
+		glm_normalize(TMPVecKeyD);
+		glm_vec3_sub(CenterVec, TMPVecKeyD, CenterVec);
 	}
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-		glm_translate_y(ViewM, -1);
+		glm_vec3_add(CenterVec, UpVec, CenterVec);
 	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-		glm_translate_y(ViewM, 1);
+		glm_vec3_sub(CenterVec, UpVec, CenterVec);
 	}
-	/*
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
 
 	}
@@ -55,7 +61,6 @@ void VP_ReadInputKeyboard(GLFWwindow *window, mat4 ViewM){
 	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
 
 	}
-	*/
 }
 
 int main(void){
@@ -165,6 +170,19 @@ int main(void){
 	//	// Sub-Section: View Matrix
 	mat4 ViewMatrix; glm_mat4_identity(ViewMatrix);
 
+	// mult vectors by matrix to get real position (only affects post transform) (eye, center, up)
+	vec3 VMEyeVector = {0.0, 0.0, 1.0};
+	vec3 VMCenterVector = {0.0, 0.0, 0.0};
+	vec3 VMUpVector = {0.0, 1.0, 0.0};
+
+	vec3 VMTempEyeVec;
+
+	//glm_mat4_mulv3(ViewMatrix, VMEyeVector, 1.0, VMEyeVector);
+	//glm_mat4_mulv3(ViewMatrix, VMCenterVector, 1.0, VMCenterVector);
+	//glm_mat4_mulv3(ViewMatrix, VMUpVector, 1.0, VMUpVector);
+
+	//glm_lookat(VMEyeVector, VMCenterVector, VMUpVector, ViewMatrix);
+
 	glUseProgram(VFProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
@@ -181,7 +199,7 @@ int main(void){
 
 	// Section: Main Frame Loop
 	while (!glfwWindowShouldClose(window)){
-		VP_ReadInputKeyboard(window, ViewMatrix);
+		VP_ReadInputKeyboard(window, VMEyeVector, VMCenterVector, VMUpVector, ViewMatrix);
 
 		// Sub-Section: Background
 		glClearColor(.25f, .08f, .37f, 1.0f);
@@ -192,7 +210,12 @@ int main(void){
 		glBindTexture(GL_TEXTURE_2D, texture0);
 		*/
 
+		// pos target up
+
 		// Sub-Section: Movement (View Matrix Manipulation)
+		glm_vec3_add(VMCenterVector, VMEyeVector, VMTempEyeVec);
+
+		glm_lookat(VMTempEyeVec, VMCenterVector, VMUpVector, ViewMatrix);
 		glUseProgram(VFProgram);
 		glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
