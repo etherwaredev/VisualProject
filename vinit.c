@@ -42,6 +42,20 @@ void VP_ReadInputKeyboard(GLFWwindow *window, mat4 ViewM){
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
 		glm_translate_y(ViewM, 1);
 	}
+	/*
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+
+	}
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+
+	}
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+
+	}
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+
+	}
+	*/
 }
 
 int main(void){
@@ -150,9 +164,6 @@ int main(void){
 	// Section: Matrices
 	//	// Sub-Section: View Matrix
 	mat4 ViewMatrix; glm_mat4_identity(ViewMatrix);
-	glm_translate_x(ViewMatrix, -.8);
-	glm_translate_y(ViewMatrix, -4);
-	glm_translate_z(ViewMatrix, -7);
 
 	glUseProgram(VFProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
@@ -172,7 +183,7 @@ int main(void){
 	while (!glfwWindowShouldClose(window)){
 		VP_ReadInputKeyboard(window, ViewMatrix);
 
-		// Sub-Section: GL
+		// Sub-Section: Background
 		glClearColor(.25f, .08f, .37f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -181,9 +192,8 @@ int main(void){
 		glBindTexture(GL_TEXTURE_2D, texture0);
 		*/
 
-		glUseProgram(VFProgram);
-
 		// Sub-Section: Movement (View Matrix Manipulation)
+		glUseProgram(VFProgram);
 		glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
 		// Sub-Section: Drawing
