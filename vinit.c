@@ -20,11 +20,30 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height){
 	glViewport(0, 0, width, height);
 }
 
-void VP_ReadInputKeyboard(GLFWwindow *window){
+void VP_ReadInputKeyboard(GLFWwindow *window, mat4 ViewM){
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
     }
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+		glm_translate_z(ViewM, 1);
+	}
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+		glm_translate_z(ViewM, -1);
+	}
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+		glm_translate_x(ViewM, 1);
+	}
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+		glm_translate_x(ViewM, -1);
+	}
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+		glm_translate_y(ViewM, -1);
+	}
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+		glm_translate_y(ViewM, 1);
+	}
 }
+
 
 int main(void){
     // Section: GLFW Init Block
@@ -132,7 +151,7 @@ int main(void){
 	// Section: Matrices
 	//	// Sub-Section: View Matrix
 	mat4 ViewMatrix; glm_mat4_identity(ViewMatrix);
-	//glm_translate_x(ViewMatrix, -.8);
+	glm_translate_x(ViewMatrix, -.8);
 	glm_translate_y(ViewMatrix, -4);
 	glm_translate_z(ViewMatrix, -7);
 
@@ -152,7 +171,7 @@ int main(void){
 
 	// Section: Main Frame Loop
 	while (!glfwWindowShouldClose(window)){
-		VP_ReadInputKeyboard(window);
+		VP_ReadInputKeyboard(window, ViewMatrix);
 
 		// Sub-Section: GL
 		glClearColor(.25f, .08f, .37f, 1.0f);
@@ -164,6 +183,11 @@ int main(void){
 		*/
 
 		glUseProgram(VFProgram);
+
+		// Sub-Section: Movement (View Matrix Manipulation)
+		glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
+
+		// Sub-Section: Drawing
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_POINTS, 0, LoadedObjects);
 
