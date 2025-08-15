@@ -44,7 +44,6 @@ void VP_ReadInputKeyboard(GLFWwindow *window, mat4 ViewM){
 	}
 }
 
-
 int main(void){
     // Section: GLFW Init Block
     #if defined(__linux__)

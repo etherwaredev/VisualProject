@@ -20,3 +20,13 @@ Renders provided `.vpvox` files found in `VisualProject/Objects/` as cubes.
 Step by Step (Linux):
 * After `git clone`ing the repo, run `make -B` within the `VisualProject` folder.
 * Then run (within the `VisualProject` Folder) `./.out/vinit.o`
+
+#### Controls
+Key | Action
+--- | ---
+W | Forward
+S | Back
+A | Left
+D | Right
+Space | Up
+Shift | Down
