@@ -38,6 +38,9 @@ void main() {
     gl_Position = MatrixMult * (gl_in[0].gl_Position + Y);
     EmitVertex();
 
+    gl_Position = MatrixMult * (gl_in[0].gl_Position + XY);
+    EmitVertex();
+
     EndPrimitive();
 
     gl_Position = MatrixMult * (gl_in[0].gl_Position + XYZ);
