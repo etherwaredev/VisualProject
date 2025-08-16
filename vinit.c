@@ -1,4 +1,3 @@
-#include "Headers/cglm/vec3.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
