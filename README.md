@@ -30,3 +30,7 @@ A | Left
 D | Right
 Space | Up
 Shift | Down
+↑ | Look Up
+↓ | Look Down
+← | Look Left
+→ | Look Right
