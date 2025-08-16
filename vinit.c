@@ -210,8 +210,6 @@ int main(void){
 		glBindTexture(GL_TEXTURE_2D, texture0);
 		*/
 
-		// pos target up
-
 		// Sub-Section: Movement (View Matrix Manipulation)
 		glm_vec3_add(VMCenterVector, VMEyeVector, VMTempEyeVec);
 
