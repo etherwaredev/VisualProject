@@ -3,7 +3,6 @@ layout(points) in;
 layout(triangle_strip, max_vertices = 14) out;
 
 uniform mat4 ProjMatrix, ViewMatrix;
-
 mat4 MatrixMult = ProjMatrix * ViewMatrix;
 
 vec4 X = vec4(1.0, 0.0, 0.0, 0.0);
@@ -15,7 +14,7 @@ vec4 XZ = vec4(1.0, 0.0, 1.0, 0.0);
 vec4 XYZ = vec4(1.0, 1.0, 1.0, 0.0);
 
 void main() {
-    // Note: 14 Vert Method, May one day be optimized to 12.
+    // Note: 15 Vert Method, May one day be optimized to 12.
 
     gl_Position = MatrixMult * (gl_in[0].gl_Position); // Root: Local (0,0)
     EmitVertex();
