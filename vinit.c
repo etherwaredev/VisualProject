@@ -52,7 +52,7 @@ void VP_ReadInputKeyboard(GLFWwindow *window, vec3 EyeVec, vec3 CenterVec, vec3 
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
 		vec3 TMPVecKeyUP;
 		glm_cross(UpVec, EyeVec, TMPVecKeyUP);
-		glm_vec3_rotate(EyeVec, -0.05f, TMPVecKeyUP);
+		glm_vec3_rotate(EyeVec, 0.05f, TMPVecKeyUP);
 	}
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
 		vec3 TMPVecKeyDOWN;
