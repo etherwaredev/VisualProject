@@ -67,8 +67,72 @@ float* VP_LoadVox(char* FilePath, int *OpSize) {
 
 void VP_VFCompile(unsigned int *VertFragProgram){
 	char *VShader = VP_ReadFile("./Shaders/Shader.vert", NULL);
-	char *FShader = VP_ReadFile("./Shaders/Shader.frag", NULL);
 	char *GShader = VP_ReadFile("./Shaders/Shader.geo", NULL);
+	char *FShader = VP_ReadFile("./Shaders/Shader.frag", NULL);
+
+	// Vertex Shader Compilation
+	unsigned int VertShaderID = glCreateShader(GL_VERTEX_SHADER); // WIP: ADD ERROR CHECK (0 == ERROR)
+	glShaderSource(VertShaderID, 1, (const char * const *)&VShader, NULL); // Cast forces char* to const char*: (const char * const *)
+	glCompileShader(VertShaderID);
+		// Shader Compilation Check
+	int Vcheck; char VInfoLog[512];
+	glGetShaderiv(VertShaderID, GL_COMPILE_STATUS, &Vcheck);
+	if (!Vcheck){
+		glGetShaderInfoLog(VertShaderID, 512, NULL, VInfoLog);
+		printf("VSHADER COMPILATION FAIL:\n%s", VInfoLog);
+	}
+
+	// Geometry Shader Compilation
+	unsigned int GeoShaderID = glCreateShader(GL_GEOMETRY_SHADER);
+	glShaderSource(GeoShaderID, 1, (const char * const *)&GShader, NULL); // Cast forces char* to const char*: (const char * const *)
+	glCompileShader(GeoShaderID);
+		// Shader Compilation Check
+	int Gcheck; char GInfoLog[512];
+	glGetShaderiv(GeoShaderID, GL_COMPILE_STATUS, &Gcheck);
+	if (!Gcheck){
+		glGetShaderInfoLog(GeoShaderID, 512, NULL, GInfoLog);
+		printf("GSHADER COMPILATION FAIL:\n%s", GInfoLog);
+	}
+
+	// Fragment Shader Compilation
+	unsigned int FragShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(FragShaderID, 1, (const char * const *)&FShader, NULL); // Cast forces char* to const char*: (const char * const *)
+	glCompileShader(FragShaderID);
+		// Shader Compilation Check
+	int Fcheck; char FInfoLog[512];
+	glGetShaderiv(FragShaderID, GL_COMPILE_STATUS, &Fcheck);
+	if (!Fcheck){
+		glGetShaderInfoLog(FragShaderID, 512, NULL, FInfoLog);
+		printf("FSHADER COMPILATION FAIL:\n%s", FInfoLog);
+	}
+
+	// Vertex, Geometry, & Fragment Shader Program Linkage
+	*VertFragProgram = glCreateProgram();
+	glAttachShader(*VertFragProgram, VertShaderID);
+	glAttachShader(*VertFragProgram, FragShaderID);
+	glAttachShader(*VertFragProgram, GeoShaderID);
+	glLinkProgram(*VertFragProgram);
+		// Shader Linkage Check
+	int VFcheck; char VFInfoLog[512];
+	glGetProgramiv(*VertFragProgram, GL_LINK_STATUS, &VFcheck);
+	if (!VFcheck){
+		glGetProgramInfoLog(*VertFragProgram, 512, NULL, VFInfoLog);
+		printf("SHADER LINKAGE FAIL:\n%s", VFInfoLog);
+	}
+
+	// Cleanup
+	glDeleteShader(VertShaderID);
+	glDeleteShader(FragShaderID);
+	glDeleteShader(GeoShaderID);
+	free(VShader); VShader = NULL;
+	free(FShader); FShader = NULL;
+	free(GShader); GShader = NULL;
+}
+
+void VP_VFCompileLighting(unsigned int *VertFragProgram){
+	char *VShader = VP_ReadFile("./Shaders/Lighting/Shader.vert", NULL);
+	char *GShader = VP_ReadFile("./Shaders/Lighting/Shader.geo", NULL);
+	char *FShader = VP_ReadFile("./Shaders/Lighting/Shader.frag", NULL);
 
 	// Vertex Shader Compilation
 	unsigned int VertShaderID = glCreateShader(GL_VERTEX_SHADER); // WIP: ADD ERROR CHECK (0 == ERROR)

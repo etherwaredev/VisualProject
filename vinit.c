@@ -114,6 +114,9 @@ int main(void){
 	unsigned int VFProgram;
 	VP_VFCompile(&VFProgram);
 
+	unsigned int VFLightingProgram;
+	VP_VFCompileLighting(&VFLightingProgram);
+
 	// Section: File Based Vertices
 	int VertSize;
 	float* Vertices = VP_LoadVox("./Objects/Garden.vpvox", &VertSize);
@@ -134,6 +137,24 @@ int main(void){
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0); //ALT 6 ARG: (void*)0
 	glEnableVertexAttribArray(0);
+	glBindVertexArray(0); // VAO Unbind
+
+	// Section: Light?
+	float LightVertices[] = {
+		0.0f, 5.0f, 0.0f,
+	};
+
+	GLuint LightPointVBO, LightPointVAO;
+	glGenVertexArrays(1, &LightPointVAO);
+	glGenBuffers(1, &LightPointVBO);
+
+	glBindVertexArray(LightPointVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, LightPointVBO);
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(LightVertices), &LightVertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0); //ALT 6 ARG: (void*)0
+	glEnableVertexAttribArray(0);
+	glBindVertexArray(0); // VAO Unbind
 
 	/* Texture Mapping Attribute
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -141,7 +162,6 @@ int main(void){
 	*/
 
 	// glBindBuffer(GL_ARRAY_BUFFER, 0); // Note: You may optionally unbind if needed here as glVertexAttribPointer() bound/selected to the VBO.
-	glBindVertexArray(0); // (Semi-Optional) VAO Unbind
 
 	/*
 	// Section: Temp Texture Loading
@@ -180,6 +200,10 @@ int main(void){
 	glUseProgram(VFProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
+	glUseProgram(VFLightingProgram);
+	glUniformMatrix4fv(glGetUniformLocation(VFLightingProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
+
+
 	//	// Sub-Section: Projection Matrix
 	mat4 ProjMatrix;
 	glm_perspective(glm_rad(90.0f), ((float)VP_INIT_WIN_SIZE_W/(float)VP_INIT_WIN_SIZE_H), 0.1f, 100.0f, (vec4 *)&ProjMatrix);
@@ -187,9 +211,15 @@ int main(void){
 	glUseProgram(VFProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
 
+	glUseProgram(VFLightingProgram);
+	glUniformMatrix4fv(glGetUniformLocation(VFLightingProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
+
 	// Section: Rendering Configuration
 	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wireframe Mode
 	glEnable(GL_DEPTH_TEST);
+
+	// Section: Misc (LightVertUniform)
+	glUniform3fv(glGetUniformLocation(VFProgram, "LightPos"), 1, (const float *)&LightVertices);
 
 	// Section: Main Frame Loop
 	while (!glfwWindowShouldClose(window)){
@@ -214,6 +244,12 @@ int main(void){
 		// Sub-Section: Drawing
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_POINTS, 0, LoadedObjects);
+
+		glUseProgram(VFLightingProgram);
+		glUniformMatrix4fv(glGetUniformLocation(VFLightingProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
+
+		glBindVertexArray(LightPointVAO);
+		glDrawArrays(GL_POINTS, 0, (sizeof(LightVertices)/12));
 
 		// Sub-Section: Frame End
 		glfwSwapBuffers(window);
