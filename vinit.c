@@ -139,10 +139,10 @@ int main(void){
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0); // VAO Unbind
 
-	// Section: Light?
+	// Section: Light (Partially Decorative)
 	float LightVertices[] = {
 		0.0f, 5.0f, 0.0f,
-	};
+	}; // Note: Value fed directly to a uniform to main shader
 
 	GLuint LightPointVBO, LightPointVAO;
 	glGenVertexArrays(1, &LightPointVAO);
