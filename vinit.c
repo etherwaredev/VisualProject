@@ -172,20 +172,11 @@ int main(void){
 	// Section: Matrices
 	//	// Sub-Section: View Matrix
 	mat4 ViewMatrix; glm_mat4_identity(ViewMatrix);
-
-	// mult vectors by matrix to get real position (only affects post transform) (eye, center, up)
 	vec3 VMEyeVector = {0.0, 0.0, 1.0};
 	vec3 VMCenterVector = {0.0, 0.0, 0.0};
 	vec3 VMUpVector = {0.0, 1.0, 0.0};
 
 	vec3 VMTempEyeVec;
-
-	//glm_mat4_mulv3(ViewMatrix, VMEyeVector, 1.0, VMEyeVector);
-	//glm_mat4_mulv3(ViewMatrix, VMCenterVector, 1.0, VMCenterVector);
-	//glm_mat4_mulv3(ViewMatrix, VMUpVector, 1.0, VMUpVector);
-
-	//glm_lookat(VMEyeVector, VMCenterVector, VMUpVector, ViewMatrix);
-
 	glUseProgram(VFProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
@@ -215,8 +206,8 @@ int main(void){
 
 		// Sub-Section: Movement (View Matrix Manipulation)
 		glm_vec3_add(VMCenterVector, VMEyeVector, VMTempEyeVec);
-
 		glm_lookat(VMTempEyeVec, VMCenterVector, VMUpVector, ViewMatrix);
+
 		glUseProgram(VFProgram);
 		glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
