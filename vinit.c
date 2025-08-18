@@ -203,7 +203,6 @@ int main(void){
 	glUseProgram(VFLightingProgram);
 	glUniformMatrix4fv(glGetUniformLocation(VFLightingProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
-
 	//	// Sub-Section: Projection Matrix
 	mat4 ProjMatrix;
 	glm_perspective(glm_rad(90.0f), ((float)VP_INIT_WIN_SIZE_W/(float)VP_INIT_WIN_SIZE_H), 0.1f, 100.0f, (vec4 *)&ProjMatrix);
@@ -226,7 +225,7 @@ int main(void){
 		VP_ReadInputKeyboard(window, VMEyeVector, VMCenterVector, VMUpVector, ViewMatrix);
 
 		// Sub-Section: Background
-		glClearColor(.25f, .08f, .37f, 1.0f);
+		glClearColor(.10f, .04f, .17f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		/* Texture Related Calls
