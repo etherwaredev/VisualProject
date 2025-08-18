@@ -143,7 +143,7 @@ void VP_VFCompileLighting(unsigned int *VertFragProgram){
 	glGetShaderiv(VertShaderID, GL_COMPILE_STATUS, &Vcheck);
 	if (!Vcheck){
 		glGetShaderInfoLog(VertShaderID, 512, NULL, VInfoLog);
-		printf("VSHADER COMPILATION FAIL:\n%s", VInfoLog);
+		printf("L-VSHADER COMPILATION FAIL:\n%s", VInfoLog);
 	}
 
 	// Geometry Shader Compilation
@@ -155,7 +155,7 @@ void VP_VFCompileLighting(unsigned int *VertFragProgram){
 	glGetShaderiv(GeoShaderID, GL_COMPILE_STATUS, &Gcheck);
 	if (!Gcheck){
 		glGetShaderInfoLog(GeoShaderID, 512, NULL, GInfoLog);
-		printf("GSHADER COMPILATION FAIL:\n%s", GInfoLog);
+		printf("L-GSHADER COMPILATION FAIL:\n%s", GInfoLog);
 	}
 
 	// Fragment Shader Compilation
@@ -167,7 +167,7 @@ void VP_VFCompileLighting(unsigned int *VertFragProgram){
 	glGetShaderiv(FragShaderID, GL_COMPILE_STATUS, &Fcheck);
 	if (!Fcheck){
 		glGetShaderInfoLog(FragShaderID, 512, NULL, FInfoLog);
-		printf("FSHADER COMPILATION FAIL:\n%s", FInfoLog);
+		printf("L-FSHADER COMPILATION FAIL:\n%s", FInfoLog);
 	}
 
 	// Vertex, Geometry, & Fragment Shader Program Linkage
@@ -181,7 +181,7 @@ void VP_VFCompileLighting(unsigned int *VertFragProgram){
 	glGetProgramiv(*VertFragProgram, GL_LINK_STATUS, &VFcheck);
 	if (!VFcheck){
 		glGetProgramInfoLog(*VertFragProgram, 512, NULL, VFInfoLog);
-		printf("SHADER LINKAGE FAIL:\n%s", VFInfoLog);
+		printf("L-SHADER LINKAGE FAIL:\n%s", VFInfoLog);
 	}
 
 	// Cleanup

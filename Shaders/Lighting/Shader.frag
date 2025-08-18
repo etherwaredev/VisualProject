@@ -1,7 +1,6 @@
 #version 460 core
 out vec4 FragColor;
 
-uniform vec3 LightVertices;
 uniform mat4 ProjMatrix, ViewMatrix;
 mat4 MatrixMult = ProjMatrix * ViewMatrix;
 

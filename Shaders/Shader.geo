@@ -1,6 +1,6 @@
 #version 460 core
 layout(points) in;
-layout(triangle_strip, max_vertices = 14) out;
+layout(triangle_strip, max_vertices = 15) out;
 
 uniform mat4 ProjMatrix, ViewMatrix;
 mat4 MatrixMult = ProjMatrix * ViewMatrix;
@@ -13,9 +13,17 @@ vec4 YZ = vec4(0.0, 1.0, 1.0, 0.0);
 vec4 XZ = vec4(1.0, 0.0, 1.0, 0.0);
 vec4 XYZ = vec4(1.0, 1.0, 1.0, 0.0);
 
-void main() {
-    // Note: 15 Vert Method, May one day be optimized to 12.
+in VData {
+	vec3 VPos;
+} VertData[1];
 
+out VData {
+	vec3 VPos;
+} FVertData;
+
+void main() {
+	FVertData.VPos = VertData[0].VPos;
+    // Note: 15 Vert Method, May one day be optimized to 12.
     gl_Position = MatrixMult * (gl_in[0].gl_Position); // Root: Local (0,0)
     EmitVertex();
 

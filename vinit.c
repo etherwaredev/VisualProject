@@ -244,6 +244,8 @@ int main(void){
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_POINTS, 0, LoadedObjects);
 
+		glUseProgram(0);
+
 		glUseProgram(VFLightingProgram);
 		glUniformMatrix4fv(glGetUniformLocation(VFLightingProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 

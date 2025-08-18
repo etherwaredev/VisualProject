@@ -1,6 +1,6 @@
 #version 460 core
 layout(points) in;
-layout(triangle_strip, max_vertices = 14) out;
+layout(triangle_strip, max_vertices = 15) out;
 
 uniform mat4 ProjMatrix, ViewMatrix;
 mat4 MatrixMult = ProjMatrix * ViewMatrix;
