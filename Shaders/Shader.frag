@@ -5,12 +5,13 @@ in VData {
 	vec3 VPos;
 } FVertData;
 
-vec3 XPosNorm = normalize(FVertData.VPos + vec3(0.5, 0.0, 0.0));
-vec3 XNegNorm = normalize(FVertData.VPos + vec3(-0.5, 0.0, 0.0));
-vec3 YPosNorm = normalize(FVertData.VPos + vec3(0.0, 0.5, 0.0));
-vec3 YNegNorm = normalize(FVertData.VPos + vec3(0.0, -0.5, 0.0));
-vec3 ZPosNorm = normalize(FVertData.VPos + vec3(0.0, 0.0, 0.5));
-vec3 ZNegNorm = normalize(FVertData.VPos + vec3(0.0, 0.0, -0.5));
+float NormalScale = 1.0;
+//vec3 XPosNorm = normalize(FVertData.VPos + vec3(NormalScale, 0.0, 0.0));
+//vec3 XNegNorm = normalize(FVertData.VPos + vec3(-NormalScale, 0.0, 0.0));
+vec3 YPosNorm = normalize(FVertData.VPos + vec3(0.0, NormalScale, 0.0));
+//vec3 YNegNorm = normalize(FVertData.VPos + vec3(0.0, -NormalScale, 0.0));
+//vec3 ZPosNorm = normalize(FVertData.VPos + vec3(0.0, 0.0, NormalScale));
+//vec3 ZNegNorm = normalize(FVertData.VPos + vec3(0.0, 0.0, -NormalScale));
 
 uniform vec3 LightPos;
 uniform vec3 CameraPos;
