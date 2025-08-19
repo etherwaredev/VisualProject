@@ -6,12 +6,12 @@ in VData {
 } FVertData;
 
 vec3 CenterPos = FVertData.VPos;
-vec3 XPosNorm = CenterPos + vec3(0.0, 0.0, 0.0);
-vec3 XNegNorm = CenterPos + vec3(0.0, 0.0, 0.0);
+vec3 XPosNorm = CenterPos + vec3(0.5, 0.0, 0.0);
+vec3 XNegNorm = CenterPos + vec3(-0.5, 0.0, 0.0);
 vec3 YPosNorm = CenterPos + vec3(0.0, 0.5, 0.0);
-vec3 YNegNorm = CenterPos + vec3(0.0, 0.5, 0.0);
-vec3 ZPosNorm = CenterPos + vec3(0.0, 0.0, 0.0);
-vec3 ZNegNorm = CenterPos + vec3(0.0, 0.0, 0.0);
+vec3 YNegNorm = CenterPos + vec3(0.0, -0.5, 0.0);
+vec3 ZPosNorm = CenterPos + vec3(0.0, 0.0, 0.5);
+vec3 ZNegNorm = CenterPos + vec3(0.0, 0.0, -0.5);
 
 uniform vec3 LightPos;
 
