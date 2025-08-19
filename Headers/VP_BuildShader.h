@@ -130,9 +130,9 @@ void VP_VFCompile(unsigned int *VertFragProgram){
 }
 
 void VP_VFCompileLighting(unsigned int *VertFragProgram){
-	char *VShader = VP_ReadFile("./Shaders/Lighting/Shader.vert", NULL);
-	char *GShader = VP_ReadFile("./Shaders/Lighting/Shader.geo", NULL);
-	char *FShader = VP_ReadFile("./Shaders/Lighting/Shader.frag", NULL);
+	char *VShader = VP_ReadFile("./Shaders/Lighting/LShader.vert", NULL);
+	char *GShader = VP_ReadFile("./Shaders/Lighting/LShader.geo", NULL);
+	char *FShader = VP_ReadFile("./Shaders/Lighting/LShader.frag", NULL);
 
 	// Vertex Shader Compilation
 	unsigned int VertShaderID = glCreateShader(GL_VERTEX_SHADER); // WIP: ADD ERROR CHECK (0 == ERROR)

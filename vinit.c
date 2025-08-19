@@ -1,3 +1,4 @@
+#include "Headers/cglm/vec3.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -141,7 +142,7 @@ int main(void){
 
 	// Section: Light (Partially Decorative)
 	float LightVertices[] = {
-		0.0f, 5.0f, 0.0f,
+		0.0f, 9.0f, 0.0f,
 	}; // Note: Value fed directly to a uniform to main shader
 
 	GLuint LightPointVBO, LightPointVAO;
@@ -218,6 +219,8 @@ int main(void){
 	glEnable(GL_DEPTH_TEST);
 
 	// Section: Misc (LightVertUniform)
+	vec3 LightVec;
+	glm_vec3_make(LightVertices, LightVec);
 	glUniform3fv(glGetUniformLocation(VFProgram, "LightPos"), 1, (const float *)&LightVertices);
 
 	// Section: Main Frame Loop
