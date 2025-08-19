@@ -1,8 +1,6 @@
 #version 460 core
 out vec4 FragColor;
 
-//in vec4 gl_FragCoord;
-
 in VData {
 	vec3 VPos;
 } FVertData;
@@ -24,7 +22,6 @@ void main() {
 
 	vec4 Ambient = (0.1 * vec4(1.0f, 1.0f, 1.0f, 1.0f)) * ObjColor;
 
-	vec3 FCoord = normalize(vec3(gl_FragCoord.x, gl_FragCoord.y, gl_FragCoord.z));
 	vec3 LightDirection = normalize(LightPos - YPosNorm);
 	float Diffrence = max(dot(YPosNorm, LightDirection), 0.0);
 	vec4 Diffuse = Diffrence * vec4(1.0f, 1.0f, 1.0f, 1.0f);
