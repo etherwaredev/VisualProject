@@ -242,6 +242,7 @@ int main(void){
 
 		glUseProgram(VFProgram);
 		glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
+		glUniformMatrix4fv(glGetUniformLocation(VFProgram, "CameraPos"), 1, false, (const float *)&VMCenterVector);
 
 		// Sub-Section: Drawing
 		glBindVertexArray(VAO);
