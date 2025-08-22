@@ -1,4 +1,3 @@
-#include "Headers/cglm/vec3.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -249,6 +248,8 @@ int main(void){
 		glDrawArrays(GL_POINTS, 0, LoadedObjects);
 
 		glUseProgram(0);
+		glBindVertexArray(0);
+		glEnableVertexAttribArray(0);
 
 		glUseProgram(VFLightingProgram);
 		glUniformMatrix4fv(glGetUniformLocation(VFLightingProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
