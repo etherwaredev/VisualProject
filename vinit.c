@@ -111,11 +111,11 @@ int main(void){
 	}
 
 	// Section: Shader Loading & Compilation
-	unsigned int VFProgram;
-	VP_VFCompile(&VFProgram);
+	unsigned int CoreShaderProgram;
+	VP_CompileShaders(&CoreShaderProgram, "./Shaders/Shader.vert", "./Shaders/Shader.geo", "./Shaders/Shader.frag");
 
-	unsigned int VFLightingProgram;
-	VP_VFCompileLighting(&VFLightingProgram);
+	unsigned int LightingShaderProgram;
+	VP_CompileShaders(&LightingShaderProgram, "./Shaders/Lighting/LShader.vert", "./Shaders/Lighting/LShader.geo", "./Shaders/Lighting/LShader.frag");
 
 	// Section: File Based Vertices
 	int VertSize;
@@ -197,21 +197,21 @@ int main(void){
 	vec3 VMUpVector = {0.0, 1.0, 0.0};
 
 	vec3 VMTempEyeVec;
-	glUseProgram(VFProgram);
-	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
+	glUseProgram(CoreShaderProgram);
+	glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
-	glUseProgram(VFLightingProgram);
-	glUniformMatrix4fv(glGetUniformLocation(VFLightingProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
+	glUseProgram(LightingShaderProgram);
+	glUniformMatrix4fv(glGetUniformLocation(LightingShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
 	//	// Sub-Section: Projection Matrix
 	mat4 ProjMatrix;
 	glm_perspective(glm_rad(90.0f), ((float)VP_INIT_WIN_SIZE_W/(float)VP_INIT_WIN_SIZE_H), 0.1f, 100.0f, (vec4 *)&ProjMatrix);
 
-	glUseProgram(VFProgram);
-	glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
+	glUseProgram(CoreShaderProgram);
+	glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
 
-	glUseProgram(VFLightingProgram);
-	glUniformMatrix4fv(glGetUniformLocation(VFLightingProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
+	glUseProgram(LightingShaderProgram);
+	glUniformMatrix4fv(glGetUniformLocation(LightingShaderProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
 
 	// Section: Rendering Configuration
 	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wireframe Mode
@@ -220,7 +220,7 @@ int main(void){
 	// Section: Misc (LightVertUniform)
 	vec3 LightVec;
 	glm_vec3_make(LightVertices, LightVec);
-	glUniform3fv(glGetUniformLocation(VFProgram, "LightPos"), 1, (const float *)&LightVertices);
+	glUniform3fv(glGetUniformLocation(CoreShaderProgram, "LightPos"), 1, (const float *)&LightVertices);
 
 	// Section: Main Frame Loop
 	while (!glfwWindowShouldClose(window)){
@@ -239,20 +239,20 @@ int main(void){
 		glm_vec3_add(VMCenterVector, VMEyeVector, VMTempEyeVec);
 		glm_lookat(VMTempEyeVec, VMCenterVector, VMUpVector, ViewMatrix);
 
-		glUseProgram(VFProgram);
-		glUniformMatrix4fv(glGetUniformLocation(VFProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
-		glUniformMatrix4fv(glGetUniformLocation(VFProgram, "CameraPos"), 1, false, (const float *)&VMCenterVector);
+		glUseProgram(CoreShaderProgram);
+		glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
+		glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "CameraPos"), 1, false, (const float *)&VMCenterVector);
 
 		// Sub-Section: Drawing
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_POINTS, 0, LoadedObjects);
 
-		glUseProgram(0);
-		glBindVertexArray(0);
-		glEnableVertexAttribArray(0);
+		//glUseProgram(0);
+		//glBindVertexArray(0);
+		//glEnableVertexAttribArray(0);
 
-		glUseProgram(VFLightingProgram);
-		glUniformMatrix4fv(glGetUniformLocation(VFLightingProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
+		glUseProgram(LightingShaderProgram);
+		glUniformMatrix4fv(glGetUniformLocation(LightingShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
 		glBindVertexArray(LightPointVAO);
 		glDrawArrays(GL_POINTS, 0, (sizeof(LightVertices)/12));
