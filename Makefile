@@ -20,4 +20,7 @@ ifeq ($(OSNAME), Darwin)
 	sed -i .bak "1,1s/460/410/" Shaders/Shader.vert
 	sed -i .bak "1,1s/460/410/" Shaders/Shader.geo
 	sed -i .bak "1,1s/460/410/" Shaders/Shader.frag
+	sed -i .bak "1,1s/460/410/" Shaders/Lighting/LShader.vert
+	sed -i .bak "1,1s/460/410/" Shaders/Lighting/LShader.geo
+	sed -i .bak "1,1s/460/410/" Shaders/Lighting/LShader.frag
 endif
