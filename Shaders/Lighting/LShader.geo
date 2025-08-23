@@ -1,6 +1,6 @@
 #version 460 core
 layout(points) in;
-layout(triangle_strip, max_vertices = 15) out;
+layout(triangle_strip, max_vertices = 16) out;
 
 uniform mat4 ProjMatrix, ViewMatrix;
 mat4 MatrixMult = ProjMatrix * ViewMatrix;
@@ -64,6 +64,9 @@ void main() {
     EmitVertex();
 
     gl_Position = MatrixMult * (gl_in[0].gl_Position + Z);
+    EmitVertex();
+
+    gl_Position = MatrixMult * (gl_in[0].gl_Position); // Root: Local (0,0)
     EmitVertex();
 
     EndPrimitive();
