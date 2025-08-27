@@ -18,7 +18,7 @@ vec4 XZ = vec4(1.0, 0.0, 1.0, 0.0);
 vec4 XYZ = vec4(1.0, 1.0, 1.0, 0.0);
 
 void main() {
-    // Note: 15 Vert Method, May one day be optimized to 12.
+    // Note: 16 Vert Method, May one day be optimized to 12.
 
     gl_Position = MatrixMult * (gl_in[0].gl_Position); // Root: Local (0,0)
     EmitVertex();

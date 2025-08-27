@@ -18,9 +18,6 @@ vec3 PointNorm = FVertData.VPos;
 uniform vec3 LightPos;
 uniform vec3 CameraPos;
 
-//uniform mat4 ProjMatrix, ViewMatrix;
-//mat4 MatrixMult = ProjMatrix * ViewMatrix;
-
 void main() {
 	if ((gl_PrimitiveID) == 1){
 		PointNorm = normalize(PointNorm + XPosNorm);

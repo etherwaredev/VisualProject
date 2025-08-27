@@ -28,7 +28,7 @@ out VData {
 
 void main() {
 	FVertData.VPos = VertData[0].VPos;
-    // Note: 15 Vert Method, May one day be optimized to 12.
+    // Note: 16 Vert Method, May one day be optimized to 12.
 
     gl_PrimitiveID = 5;
     gl_Position = MatrixMult * (gl_in[0].gl_Position); // Root: Local (0,0)
