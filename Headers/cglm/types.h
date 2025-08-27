@@ -92,7 +92,7 @@ typedef vec2                    mat4x2[4];  /* [col (4), row (2)] */
 typedef vec3                    mat4x3[4];  /* [col (4), row (3)] */
 
 /*
-  Important: cglm stores quaternion as [x, y, z, w] in memory since v0.4.0 
+  Important: cglm stores quaternion as [x, y, z, w] in memory since v0.4.0
   it was [w, x, y, z] before v0.4.0 ( v0.3.5 and earlier ). w is real part.
 */
 

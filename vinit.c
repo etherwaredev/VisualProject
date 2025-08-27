@@ -197,11 +197,9 @@ int main(void){
 	vec3 VMUpVector = {0.0, 1.0, 0.0};
 
 	vec3 VMTempEyeVec;
+
 	glUseProgram(CoreShaderProgram);
 	glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
-
-	glUseProgram(LightingShaderProgram);
-	glUniformMatrix4fv(glGetUniformLocation(LightingShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
 	//	// Sub-Section: Projection Matrix
 	mat4 ProjMatrix;
@@ -210,16 +208,25 @@ int main(void){
 	glUseProgram(CoreShaderProgram);
 	glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
 
-	glUseProgram(LightingShaderProgram);
-	glUniformMatrix4fv(glGetUniformLocation(LightingShaderProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
+	// Section: UBO
+	GLuint MainUBO;
+	glGenBuffers(1, &MainUBO);
+	glBindBuffer(GL_UNIFORM_BUFFER, MainUBO);
+	glBufferData(GL_UNIFORM_BUFFER, (sizeof(mat4)*3), NULL, GL_DYNAMIC_DRAW);
+
+	glBindBufferRange(GL_UNIFORM_BUFFER, 0, MainUBO, 0, (sizeof(mat4)*3));
+	glUniformBlockBinding(CoreShaderProgram, glGetUniformBlockIndex(CoreShaderProgram, "UniMat"), 0);
+	glUniformBlockBinding(LightingShaderProgram, glGetUniformBlockIndex(CoreShaderProgram, "UniMat"), 0);
+
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), &ProjMatrix);
+	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4), sizeof(mat4), &ViewMatrix);
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
 	// Section: Rendering Configuration
 	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wireframe Mode
 	glEnable(GL_DEPTH_TEST);
 
 	// Section: Misc (LightVertUniform)
-	vec3 LightVec;
-	glm_vec3_make(LightVertices, LightVec);
 	glUniform3fv(glGetUniformLocation(CoreShaderProgram, "LightPos"), 1, (const float *)&LightVertices);
 
 	// Section: Main Frame Loop
@@ -240,20 +247,21 @@ int main(void){
 		glm_lookat(VMTempEyeVec, VMCenterVector, VMUpVector, ViewMatrix);
 
 		glUseProgram(CoreShaderProgram);
-		glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
+		glBindBuffer(GL_UNIFORM_BUFFER, MainUBO);
+		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4), sizeof(mat4), &ViewMatrix);
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
 		glUniform3fv(glGetUniformLocation(CoreShaderProgram, "CameraPos"), 1, (const float *)&VMCenterVector);
 
 		// Sub-Section: Drawing
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_POINTS, 0, LoadedObjects);
 
-		//glUseProgram(0);
-		//glBindVertexArray(0);
-		//glEnableVertexAttribArray(0);
+		glUseProgram(0);
+		glBindVertexArray(0);
+		glEnableVertexAttribArray(0);
 
 		glUseProgram(LightingShaderProgram);
-		glUniformMatrix4fv(glGetUniformLocation(LightingShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
-
 		glBindVertexArray(LightPointVAO);
 		glDrawArrays(GL_POINTS, 0, (sizeof(LightVertices)/12));
 

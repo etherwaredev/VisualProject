@@ -2,8 +2,12 @@
 layout(points) in;
 layout(triangle_strip, max_vertices = 16) out;
 
-uniform mat4 ProjMatrix, ViewMatrix;
-mat4 MatrixMult = ProjMatrix * ViewMatrix;
+layout (std140) uniform UniMat{
+	mat4 ProjMatrix;
+	mat4 ViewMatrix;
+} Mat[1];
+
+mat4 MatrixMult = Mat[0].ProjMatrix * Mat[0].ViewMatrix;
 
 float CubeScale = 1.0;
 vec4 X = vec4(CubeScale, 0.0, 0.0, 0.0);

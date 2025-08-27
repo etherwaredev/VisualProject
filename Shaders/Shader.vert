@@ -1,8 +1,6 @@
 #version 460 core
 layout(location = 0) in vec3 Pos;
 
-uniform mat4 ProjMatrix, ViewMatrix;
-
 out VData {
 	vec3 VPos;
 } VertData;
