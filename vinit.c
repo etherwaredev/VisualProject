@@ -141,7 +141,7 @@ int main(void){
 
 	// Section: Light (Partially Decorative)
 	float LightVertices[] = {
-		0.0f, 4.0f, 0.0f,
+		0.0f, 5.0f, 0.0f,
 	}; // Note: Value fed directly to a uniform to main shader
 
 	GLuint LightPointVBO, LightPointVAO;

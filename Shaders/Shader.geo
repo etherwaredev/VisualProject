@@ -2,7 +2,7 @@
 layout(points) in;
 layout(triangle_strip, max_vertices = 16) out;
 
-layout (std140) uniform UniMat{
+layout(std140) uniform UniMat{
 	mat4 ProjMatrix;
 	mat4 ViewMatrix;
 } Mat[1];
