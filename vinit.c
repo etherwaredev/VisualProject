@@ -104,7 +104,7 @@ int main(void){
 	glViewport(0, 0, VP_INIT_WIN_SIZE_W, VP_INIT_WIN_SIZE_H);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-	// Section: GLEW Init Block // MUST BE WITHIN OPENGL CONTEXT
+	// Section: GLEW Init Block // (MUST BE WITHIN OPENGL CONTEXT)
 	GLenum GlewErrCheck = glewInit();
 	if (GLEW_OK != GlewErrCheck) {
 		printf("GLEW Initialization Failed\n"); return EXIT_FAILURE;
