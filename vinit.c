@@ -198,7 +198,7 @@ int main(void){
 
 	vec3 VMTempEyeVec;
 
-	glUseProgram(CoreShaderProgram);
+	//glUseProgram(CoreShaderProgram);
 	//glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
 	//	// Sub-Section: Projection Matrix
