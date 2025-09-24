@@ -147,9 +147,18 @@ void VP_CompileShaders(unsigned int *ShaderProgramID, char *VFilePath, char *GFi
 	glDeleteShader(VertShaderID);
 	glDeleteShader(GeoShaderID);
 	glDeleteShader(FragShaderID);
-	free(VShader); VShader = NULL;
-	free(GShader); FShader = NULL;
-	free(FShader); GShader = NULL;
+
+	if (VShader != NULL){
+		free(VShader); VShader = NULL;
+	}
+
+	if (GShader != NULL){
+		free(GShader); GShader = NULL;
+	}
+
+	if (FShader != NULL){
+		free(FShader); FShader = NULL;
+	}
 }
 
 #endif
