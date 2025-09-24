@@ -39,7 +39,6 @@ char* VP_ReadFile(char *Path, int *OpSize) {
 	}
 }
 
-// Note: May be moved to a seperate Header
 float* VP_LoadVox(char* FilePath, int *OpSize) {
 	// WARNING: Values read may experience floating point precission errors if they're smaller than one decimal/radix point.
 
