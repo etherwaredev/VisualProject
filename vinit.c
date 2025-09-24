@@ -199,14 +199,14 @@ int main(void){
 	vec3 VMTempEyeVec;
 
 	glUseProgram(CoreShaderProgram);
-	glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
+	//glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
 
 	//	// Sub-Section: Projection Matrix
 	mat4 ProjMatrix;
 	glm_perspective(glm_rad(90.0f), ((float)VP_INIT_WIN_SIZE_W/(float)VP_INIT_WIN_SIZE_H), 0.1f, 100.0f, (vec4 *)&ProjMatrix);
 
 	glUseProgram(CoreShaderProgram);
-	glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
+	//glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
 
 	// Section: UBO
 	GLuint MainUBO;
