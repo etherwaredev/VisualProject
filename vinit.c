@@ -198,15 +198,9 @@ int main(void){
 
 	vec3 VMTempEyeVec;
 
-	//glUseProgram(CoreShaderProgram);
-	//glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ViewMatrix"), 1, false, (const float *)&ViewMatrix);
-
 	//	// Sub-Section: Projection Matrix
 	mat4 ProjMatrix;
 	glm_perspective(glm_rad(90.0f), ((float)VP_INIT_WIN_SIZE_W/(float)VP_INIT_WIN_SIZE_H), 0.1f, 100.0f, (vec4 *)&ProjMatrix);
-
-	glUseProgram(CoreShaderProgram);
-	//glUniformMatrix4fv(glGetUniformLocation(CoreShaderProgram, "ProjMatrix"), 1, false, (const float *)&ProjMatrix);
 
 	// Section: UBO
 	GLuint MainUBO;
@@ -221,6 +215,8 @@ int main(void){
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), &ProjMatrix);
 	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4), sizeof(mat4), &ViewMatrix);
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+	glUseProgram(CoreShaderProgram);
 
 	// Section: Rendering Configuration
 	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wireframe Mode
